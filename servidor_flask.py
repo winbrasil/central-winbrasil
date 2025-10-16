@@ -14,7 +14,7 @@ def verificar_token():
         
     FIREBASE_API_KEY = "AIzaSyATicQTeRmBrWIHmNIzoi5zL3w-Lo7PkAw"
     
-    url = f"https://identitytoolkit.googleapis.com/v1/accounts: lookup?key={FIREBASE_API_KEY}"
+    url = f"https://identitytoolkit.googleapis.com/v1/accounts:lookup?key={FIREBASE_API_KEY}"
     
     try:
         resp = requests.post(url, json={"idToken": token})
