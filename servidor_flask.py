@@ -3,6 +3,10 @@ from flask import Flask, request, jsonify
 
 app =  Flask(__name__)
 
+@app.route("/")
+def raiz():
+    return "online"
+
 @app.route("/resposta", methods=["POST"])
 def servidor():
     dados = request.get_json()
