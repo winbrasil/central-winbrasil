@@ -15,8 +15,6 @@ def verificar_token():
     FIREBASE_API_KEY = "AIzaSyATicQTeRmBrWIHmNIzoi5zL3w-Lo7PkAw"
     
     url = f"https://identitytoolkit.google.apis.com/v1/accounts: lookup?key={FIREBASE_API_KEY}"
-        
-    #return jsonify({"ok": True, "msg": "Token recebido com sucesso!"})
     
     try:
         resp = requests.post(url, json={"idToken": token})
