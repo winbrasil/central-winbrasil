@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import os
 
 
 app =  Flask(__name__)
@@ -10,6 +11,8 @@ def verify():
     
     if not token:
         return jsonify({"ok": False, "error": "id_token ausente!"}), 400
+        
+    return jsonify({"ok": True, "msg": "Token recebido com sucesso!"})
 
 
 @app.route("/", methods=["GET"])
@@ -28,4 +31,10 @@ def servidor():
         return jsonify(error="Campo msg é obrigatório."), 400
         
     return jsonify(resposta=f"Recebi: {msg}")
+    
+    
+if __name__ == "__main__":
+    porta = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=porta)
+    
     
