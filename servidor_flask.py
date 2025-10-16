@@ -4,7 +4,7 @@ import requests
 
 app =  Flask(__name__)
 
-@app.post("/auth/verify")
+@app.post("/auth/verificar_token")
 def verificar_token():
     data = request.get_json(silent=True) or {}
     token = data.get("id_token")
