@@ -9,14 +9,14 @@ def raiz():
 
 @app.route("/resposta", methods=["POST"])
 def servidor():
-    dados = request.get_json()
+    if not request.is_json:
+        return jsonify(error="Envie JSON no corpo da requesição."), 400
+    data = request.get_json(silent=True)or {}
     
-    msg = dados.get()
+    msg = data.get("msg", "Sem mensagem")
     
-    #resposta = ""
-    print(msg)
+    if msg is None:
+        return jsonify(error="Campo msg é obrigatório."), 400
+        
+    return jsonify(resposta=f"Recebi: {msg}")
     
-    return jsonify(200)
-    
-#if __name__ == "__main__":
-#    app.run(host="0.0.0.0", port=5000, debug=True)
