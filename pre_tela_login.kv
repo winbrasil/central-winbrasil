@@ -1,0 +1,204 @@
+
+<PreTelaLogin>:
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            source: "icones/icon_TelaLogin/icon_fundo_TelaLogin.png"
+            #texture: root.app.criar_gradient_texture()
+            pos: self.pos
+            size: self.size
+            
+    BoxLayout:
+        orientation: "vertical"
+        spacing: dp(20)
+        padding: [dp(10), dp(20), dp(10), dp(10)]
+
+            
+        
+        Label:
+            markup: True
+            size_hint: 1, None
+            text: f"[u][size={int(sp(50))}]S[/u][/size]EJA BEM-VINDO!"
+            text_size: self.width - dp(5), None
+            font_name: "fonte/Rubik_Mono_One/RubikMonoOne-Regular.ttf"
+            font_size: root.fonte_padrao //1.5
+            valign: "middle"
+            halign: "center"
+            #background_color: 0,0,0,0
+            color: 0.2, 0.1, 0.6, 1
+
+            
+        
+        
+#layout icon login ------------- >        
+        BoxLayout:
+            spacing: dp(40)
+            padding: dp(20)
+            orientation: "vertical"
+            size_hint: 1, None
+            height: self.minimum_height
+            width: self.minimum_width
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                RoundedRectangle:
+                    texture: root.app.criar_gradient_texture((0.1, 0.1, 0.1, 1), (1, 1, 1, 1), 250)
+                    pos: self.pos
+                    size: self.size
+                    radius: [dp(50)]
+            
+            
+            Button:
+                font_name: "fonte/Shafarik/Shafarik-Regular.ttf"
+                size_hint: 1, None
+                background_normal: "icones/icones_login/icon_btn_pre_login.png"
+                
+                width: min(dp(100), root.win.width * 0.1)
+                height: min(dp(200), root.win.height * 0.2)
+            
+# < ------------------------
+                
+                
+#layout que tem widgets login ou cadastre-se -- >                
+        BoxLayout:
+            orientation: "vertical"
+            spacing:dp(15)
+            padding: dp(20)
+            size_hint: 1, None
+            height: self.minimum_height
+            
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                RoundedRectangle:
+                    texture: root.app.criar_gradient_texture((0.1,0.1,0.1,1), (1, 1, 1, 1), 200)
+                    pos: self.pos
+                    size: self.size
+                    radius: [dp(20)]
+                    
+                #Color:
+#                    rgba: 1,1,1,0.5
+#                    
+#                RoundedRectangle:
+#                    #source: "icones/icon_TelaLogin/icon_fundo_TelaLogin.png"
+#                    pos: self.pos
+#                    size: self.size
+#                    radius: [dp(20)]
+            
+            
+            Label:
+                text_size: self.width - dp(5), None
+                markup: True
+                size_hint: 1, None
+                text: "[i] • Escolha a opção para continuar:"
+                valign: "middle"
+                    
+            Button:
+                markup: True
+                text: "[b]LOGIN"
+                size_hint: 1, None
+                height: dp(80)
+                valign: "middle"
+                halign: "center"
+                on_release: setattr(root.app.root, "current", "tela_login")
+                #color: (1,1, 1, 1)
+                background_color: (0,0,0,0)
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 1, 1
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        #texture: root.app.criar_gradient_texture((0,0,1,1), (1,1,1,1))
+
+                
+            
+            
+                
+            Button:
+                markup: True
+                text: "[b]CADASTRE-SE"
+                #color: (0,1, 0, 1)
+                size_hint: 1, None
+                height: dp(80)
+                background_color: (0,0,0,0)
+                on_release: setattr(root.app.root, "current", "tela_cadastramento")
+                canvas.before:
+                    Color:
+                        rgba: 0,1,0,1
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        #texture: root.app.criar_gradient_texture((1,1,1,1), (0,1,0,1))
+                
+                
+
+#< --------------
+            
+            
+                
+                
+            
+        MDLabel:
+            theme_text_color: "Custom"
+            text:" • conecte via rede social:"
+            size_hint:1, None
+            text_color: 1,1,1,1
+
+#layout icones opcões de login(gmail, etc) ------ >
+        BoxLayout:
+            orientation: "vertical"
+            size_hint:1, 1
+
+            canvas.before:
+                Color:
+                    rgba: 1,1,1,1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [dp(30)]
+                    texture: root.app.criar_gradient_texture((0.1, 0.1, 0.1, 1), (1,1,1,1), 200)
+                    
+                    
+                    
+                    
+            
+                
+            ScrollView:
+                do_scroll_y: False
+
+                    
+                    
+                BoxLayout:
+                    padding: dp(10)
+                    
+                    orientation: "horizontal"
+                    size_hint: None , None
+                    height: self.minimum_height
+                    spacing: dp(15)
+                        
+                        
+                    Button:
+                        background_normal: "icones/icon_gmail/icon_gmail.png"
+                        size_hint: None, None
+                        width: min(dp(220), root.win.width *0.15)
+                        height: min(dp(60), root.win.height *0.1)
+                        
+                    Button:
+                        background_normal: "icones/icon_facebook/icon_facebook.png"
+                        
+                        size_hint: None, None
+                        width: min(dp(220), root.win.width *0.15)
+                        height: min(dp(60), root.win.height *0.1)
+                        
+                        
+        Label:
+            #valign: "middle"
+            halign: "left"
+            markup: True
+            text:"[i][color=#000000] • Licença reservado ao [b]WinBrasil[/b], 2025."
+            size_hint: 1, None
+            text_size: self.size
+                
+                

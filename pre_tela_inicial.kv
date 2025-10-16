@@ -1,0 +1,152 @@
+<PreTelaInicial>:
+    canvas.before:
+        Rectangle:
+            pos:self.pos
+            size:self.size
+            texture: root.app.criar_gradient_texture((1,1,1,1), (0.1, 0.1, 0.1, 1))
+        
+    BoxLayout:
+        
+        
+        orientation: "vertical"
+        spcing: dp(10)
+        padding: dp(5)
+        canvas.before:
+            Rectangle:
+                pos:self.pos
+                size:self.size
+                texture: root.app.criar_gradient_texture()
+                
+            
+        
+        
+        
+        MDBoxLayout:
+            size_hint_y: None
+            height: self.minimum_height
+            orientation: "vertical"
+            padding: dp(10)
+            
+            canvas.before:
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    texture: root.app.criar_gradient_texture()
+                    radius: [dp(40), dp(40), 0,0]
+            
+            Button:
+                id: btn_id
+                background_color: 0,0,0,0
+                canvas.before:
+                    Color:
+                        rgba: 0,0,0.1,0.4
+                    Ellipse:
+    
+                        pos: self.pos
+                        size: self.size
+                        #width: [dp(1)]
+                
+                
+                text: f"[u]WINBRASIL\n[color=#ff0000][b][size={int(root.fonte_padrao//2)}]  Empresarial[/size]"
+                
+                markup: True
+                size_hint_y: None
+                size: self.texture_size
+                font_name: "fonte/Playfair_Display/PlayfairDisplay-Italic-VariableFont_wght.ttf"
+                font_size: root.fonte_padrao/1.5
+            
+            
+            
+            
+            
+        MDBoxLayout:
+            orientation: "vertical"
+            #spacing: dp(10)
+            padding: dp(30)
+            #size_hint_y: 0.5
+            #height: self.minimum_height
+            canvas.before:
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    texture: root.app.criar_gradient_texture((0,0,0,1), (0,0,0.5,1))
+                    radius: [dp(40)]
+                Color:
+                    rgba: 1,1,1,0.3
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                    source: "icones/icon_fundo_pre_tela_incial/icon_fundo_pre_tela_incial2.png"
+                    
+            MDIconButton:
+                #theme_icon_color: "Custom"
+                size_hint_y: None
+                
+                icon: "icones/icon_usuario_pre_tela_inicial/icon_usuario_pre_tela_inicial2.png"
+                icon_size: "150sp"
+                #icon_color: 1,0,1,1
+                height: dp(80)
+                #halign: "center"
+                pos_hint: {"center_x":0.5}
+                md_bg_color: 0.1, 0,0.4,0.2
+                
+                    
+                    
+                    
+            
+            
+            
+            
+            Label:
+                markup: True
+                id: texto_saudacao
+                font_size: root.fonte_padrao
+                text: ""
+                size_hint_y: 0.1
+                #size: (self.texture_size[0] + dp(20), self.texture_size[1] + dp(20))
+                font_name: "fonte/Rubik_Moonrocks/RubikMoonrocks-Regular.ttf"
+                text_size: self.width - dp(20), None
+                valgin: "middle"
+                halign: "center"
+                background_color:0,0,0,0
+                canvas.before:
+                    Color:
+                        rgba: 0,0,0,0
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                        
+                        
+                        
+            MDLabel:
+                opacity: 0
+                id:prosseguir
+                markup: True
+                text:"[u]AVANÇAR"
+                theme_text_color: "Custom"
+                text_color: 1,1,1,1
+                size_hint: 1, None
+                halign: "center"
+                font_name: "fonte/Unlock/Unlock-Regular.ttf"
+                        
+            
+            
+            MDIconButton:
+                opacity:0
+                icon_size: "100sp"
+                id: btn_pre_iniciar
+                size_hint: 0.5, 0.02
+                #height: dp(120)
+                #width: dp(600)
+                icon: "icones/icon_prosseguir/icon_prosseguir_branco.png"
+                #background_normal: "icones/icon_prosseguir/icon_prosseguir_branco.png"
+                on_release: setattr(app.root, "current", "pre_tela_login")
+                pos_hint: {"center_x": 0.5, "center_y":1}
+                md_bg_color: 0.2, 0, 0.8,1
+#                canvas.before:
+#                    RoundedRectangle:
+#                        pos: self.pos
+#                        size: self.size
+#                        texture: root.app.criar_gradient_texture()
+#                        radius: [dp(50)]
+                    

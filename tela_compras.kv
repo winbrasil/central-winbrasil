@@ -1,0 +1,191 @@
+<TelaCompras>:
+    canvas.before:
+        Color:
+            rgba: 1,1,1,1
+            
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    
+            
+    MDFloatLayout:
+        
+        
+        
+            
+    
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: dp(10)
+            padding: dp(5)
+            
+            MDBoxLayout:
+                orientation: "vertical"
+                size_hint: 1, 0.5
+                canvas.before:
+                    Color:
+                        rgba: 1,1,1,1
+                        
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        texture:root.app.criar_gradient_texture((1,1,1,1), (0,0,0,1))
+                        radius: [dp(30), dp(30), 0, 0]
+                
+                
+                MDLabel:
+                    markup: True
+                    text: f"[b][u][size={int(sp(25))}]C[/size]ompras em loja"
+                    size_hint: 1, None
+                    halign:"center"
+                    
+                Image:
+                    source: "icones/icon_compras/icon_mercado.png"
+
+                    allow_stretch: True
+
+                    
+            MDLabel:
+                markup: True
+                text: "[i]Buscas recentes:"
+                size_hint: 1, None
+#box pai historico compras ---- >   
+            MDBoxLayout:
+                orientation:"horizontal"
+                padding: dp(5)
+                size_hint: 1, None
+                height: self.minimum_height
+    
+                #spacing: dp(10)
+    
+                canvas.before:
+                    Color:
+                        rgba: 1,1,1,1
+                                
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        texture: root.app.criar_gradient_texture((0,1,0,1), (1,1,1,1), 100)
+                        radius: [dp(20)]
+                
+                ScrollView:
+                    id: scroll_recentes
+                    size_hint: 1, None
+                    #width: box_recentes_filho.width
+                    height: box_recentes_filho.height
+                    
+                    
+                    MDBoxLayout:
+                        
+                        size_hint: None, None
+                        size: self.minimum_size
+                        spacing: dp(10)
+                        padding:dp(5)
+                        orientation:"horizontal"
+                        #radius: [0, dp(20), 0, dp(20)]
+                        #md_bg_color:1,0.0,1,1
+                        id:box_recentes_filho
+                        
+                        
+                        
+                        MDRectangleFlatButton:
+                            markup: True
+                            text:"[b]WINBRASIL"
+                            md_bg_color: 0,0,0,0
+                            #background_color: 0,0,0,0
+                            size_hint: None, None
+                            width: dp(250)
+                            height: dp(80)
+                            
+# < --------------
+                            
+                            
+                            
+                            
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: dp(10)
+                spacing: dp(15)
+                id: box_merca_pai
+                
+                
+                canvas.before:
+                    Color:
+                        rgba:1,1,1,1
+                    RoundedRectangle:
+                       
+                        pos: self.pos
+                        size: self.size
+                        texture: root.app.criar_gradient_texture((0,1, 0,1), (0, 0.5, 0,0.5), 100)
+                        radius: [dp(30), dp(30), 0, 0]
+                
+                ScrollView:
+                    id:scroll_compras
+                    #canvas.before:
+    #                    Color:
+    #                        rgba: 0.1, 0, 0, 1
+    #                    Rectangle:
+    #                        pos: self.pos
+    #                        size: self.size
+#box resposavel pela mercadorias ----- >                    
+                    BoxLayout:
+                        orientation:"vertical"
+                        id:box_merca_filho
+                        padding: dp(10)
+                        spacing: dp(15)
+                        size_hint: 1, None
+                        height: self.minimum_height
+                        
+                        
+                        
+# < ---------
+                
+                
+                
+                
+                
+            MDLabel:
+                markup: True
+                text: f"[b][i][size={int(sp(30))}]W[/size][/b]inBrasil"
+                size_hint: 1, None
+                halign:"center"
+                theme_text_color: "Custom"
+                text_color: 0,0,1,0.5
+                
+                canvas.before:
+                    Color:
+                        rgba: 1,1,1,1
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        texture: root.app.criar_gradient_texture((0, 1, 0.2,1),(1,1,1,1))
+                        radius: [dp(50), 0, dp(50), 0]
+                        
+        MDBoxLayout:
+            pos_hint: {"center_x":0.9, "center_y":0.25}
+            orientation: "horizontal"
+            size_hint: None, None
+            width: self.minimum_width
+            height: self.minimum_height
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1,1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [dp(50), 0, dp(50), 0]
+                    texture: root.app.criar_gradient_texture((0,1,0,1), (0, 0, 1,1), 150)
+            
+            MDIconButton:
+                icon:"icones/icon_carrinho/icon_carrinho.png"
+                size_hint: None, None
+                
+                
+            MDLabel:
+                font_style: "H6"
+                id:cont_items_carrinho
+                text: f"{root.cont_items_compras}"
+                size_hint_x: None
+                theme_text_color: "Custom"
+                text_color: 0,0.2,1,1
+                #valign: "top"

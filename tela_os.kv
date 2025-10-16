@@ -1,0 +1,289 @@
+
+
+<OSCard>:
+    orientation: "vertical"
+    
+    height: self.minimum_height
+    padding: [dp(10), dp(10), dp(10), dp(10)]
+    spacing: dp(10)
+    elevation: 3
+
+    
+    
+    
+     
+            
+    MDBoxLayout:
+        size_hint: 1, None
+        height: self.minimum_height
+        padding: dp(5)
+        
+        MDLabel:
+            text: root.data_str
+            size_hint: 1, None
+            height: dp(5)
+            
+    # Linha 1: avatar + cliente + chip status
+    MDBoxLayout:
+        size_hint:1, None
+        height: self.minimum_height
+        spacing: dp(2)
+        #padding: dp(30)
+        
+        
+
+        MDBoxLayout:
+            size_hint: 1, None
+            height: self.minimum_height
+            #width: dp(64)
+            md_bg_color: 0, 0.8, 0, 0.2
+            radius: [dp(20)]
+            
+            MDIconButton:
+                size_hint: 0.3, None
+                icon: "account"
+                halign: "center"
+                valign: "center"
+                icon_size: dp(20)
+
+        MDLabel:
+            id: texto_cliente
+            size_hint: 1, None
+            #color: 0,0,0,1
+            text: root.cliente
+            font_style: "Subtitle1"
+            bold: True
+            text_size: self.width, None
+            valign: "middle"
+            halign: "center"
+            #multiline: True
+            #shorten: True
+            #shorten_from: "right"
+
+        MDFillRoundFlatIconButton:
+            text: root.status
+            size_hint: 1, None
+            height: dp(50)
+            md_bg_color:
+                (1,0.5,0,1) if root.status.lower() or "" == "pendente" else \
+                ((0.1,0.5,0,1) if root.status.lower() or "" in ("em rota","em_rota") else (1,0.5,0,1))
+            theme_text_color: "Custom"
+            #text_color: 1,1,1,1
+
+    # Linha 2: vendedor + pagamento
+    MDBoxLayout:
+        size_hint: 1, None
+        height: self.minimum_height
+        #spacing: dp(12)
+
+        MDIconButton:
+            icon: "account-tie"
+            icon_size: dp(20)
+            theme_icon_color: "Custom"
+            icon_color: 1, 0.5, 0,1
+
+        MDLabel:
+            markup: True
+            text: "Vendedor:  {} {}".format(root.info_cor_vendedor, root.vendedor)
+            
+            theme_text_color: "Custom"
+            
+            size_hint: 1, None
+            height: dp(40)
+
+        MDIconButton:
+            icon: "alert-circle-outline"
+            size_hint: 1, None
+            height: dp(40)
+            icon_size: dp(20)
+            theme_icon_color: "Custom"
+            icon_color: 1, 0.5, 0,1
+
+        MDLabel:
+            markup: True
+            text: 'Pagamento: {} {}'.format(root.info_cor_pag, root.pagamento)
+            theme_text_color: "Custom"
+
+    # Linha 3: botões
+    MDBoxLayout:
+        size_hint: 1, None
+        height: self.minimum_height
+        spacing: dp(12)
+
+        MDFillRoundFlatIconButton:
+            text: "Editar"
+            size_hint: 1, None
+            height: dp(40)
+            md_bg_color: 0, 0.5, 0, 1
+            on_release: app.on_editar_item(root) if hasattr(app, "on_editar_item") else None
+
+        MDFillRoundFlatIconButton:
+            text: "Detalhes"
+            size_hint: 1, None
+            height: dp(40)
+            md_bg_color: 0, 0.5, 0, 1
+            on_release: app.on_detalhes_item(root) if hasattr(app, "on_detalhes_item") else None
+
+
+# ===========================================================
+# Tela principal de Ordem de Serviço
+# =======================================
+    
+    
+<TelaOrdemServico>:
+    
+    MDFloatLayout:
+        #orientation: "vertical"
+        id:box_pai_todos
+        canvas.before:
+            Color:
+                rgba: 1,1,1,1
+                
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                texture: root.app.criar_gradient_texture((0.4, 0.4, 0, 0.2), (0.7, 0.6, 0,0.2))
+                
+                
+                
+                
+                
+                
+# Box pai os ----- >
+        MDBoxLayout:
+            id:box_pai_os
+            orientation: "vertical"
+            size: 1,1
+            spacing: dp(5)
+            #radius: [0, 0, dp(30), dp(30)]
+            #padding: [dp(20), 0, 0, dp(20)]
+            #md_bg_color: 1,1,1,0.4
+            
+            
+            
+            MDTopAppBar:
+                title: "Ordem de serviço"
+                left_action_items: [["arrow-left", lambda *a: setattr(app.root, "current", "tela_inicial")]]
+                right_action_items: [["magnify", lambda *a: None]]
+                md_bg_color: 0, 0.5, 0,1
+                
+                
+            
+                
+                
+            MDBoxLayout:
+                
+                
+                
+                MDTabs:
+                    id: tabs
+                    tabs_hint_x: True
+                    #elevantion: 20
+                    tab_indicator_anim: True
+                    background_color: 0, 0.5, 0, 0
+                    text_color_normal: 0, 0, 0, 1
+                    text_color_active: 0,0.5,0,1
+                    ripple_color: 0, 0.4, 0,1
+                    #indicator_height: "4dp"
+                    
+                    
+                    
+                    
+                    Tab:
+                        title:"PENDENTES"
+
+                        
+                        RecycleView:
+                            viewclass: "OSCard"
+                            id: rv_pendentes
+                            
+                            
+                            RecycleBoxLayout:
+                                orientation: "vertical"
+                                spacing: dp(10)
+                                padding: [dp(10), dp(10), dp(10), dp(60)]
+                                id: box_items_pendentes
+                                default_size_hint:1, None
+                                default_size: None, None
+
+                                size_hint_y: None
+                                height: self.minimum_height
+                                
+                        
+                    Tab:
+                        title:"EM ROTA"
+                        
+                        RecycleView:
+                            id: rv_em_rota
+                            viewclass: "OSCard"
+                            
+                            RecycleBoxLayout:
+                                spacing: dp(10)
+                                padding: dp(10)
+                                id: box_items_em_rota
+                                orientation: "vertical"
+                                size_hint_y:None
+                                default_size_hint: 1, None
+                                height: self.minimum_height
+                        
+                    Tab:
+                        title:"CONCLUÍDO"
+                        
+                        RecycleView:
+                            id: rv_concluidos
+                            viewclass: "OSCard"
+                            
+                            RecycleBoxLayout:
+                                spacing: dp(10)
+                                padding: dp(10)
+                                orientation: "vertical"
+                                id: box_items_concluidos
+                                default_size_hint: 1, None
+                                size_hint_y: None
+                                height: self.minimum_height
+                                
+ #Box escolher data os ---- >
+        MDBoxLayout:
+            size_hint: None, None
+            width: self.minimum_width
+            height: self.minimum_height
+            pos_hint: {"center_x":0.8, "center_y":0.3}
+            
+            
+            MDFillRoundFlatIconButton:
+                markup: True
+                text:'[b]Alterar Data'
+                size_hint: None, None
+                width: dp(50)
+                height: dp(50)
+                md_bg_color: 0.8,0.8,0.8,1
+                icon: "calendar-plus"
+                theme_icon_color: "Custom"
+                theme_text_color: "Custom"
+                text_color: 0,0.6,0,1
+                icon_color: 0, 0.5, 0 ,1
+                icon_size: dp(30)
+                font_style: "Subtitle1"
+                on_release: root.abrir_datepicker()
+
+# < ---------
+                        
+                        
+        MDBoxLayout:
+            orientation: "horizontal"
+            radius: [dp(30), dp(30), 0, 0]
+            size_hint: 1, 0.05
+            pos_hint: {"y":0}
+            md_bg_color: 0, 0.5, 0, 1
+            
+            MDFillRoundFlatIconButton:
+                id: texto_quant_pedido
+                md_bg_color: 0,0,0,0
+                text: "Qt. Pedidos: N/A"
+                theme_text_color: "Custom"
+                text_color: 1,1,1,1
+                
+                
+                
+# < -----------
+            

@@ -1,0 +1,755 @@
+
+
+<OrgMerca>:
+    size_hint: 1, 1
+    #width: dp(180)
+    #height: self.minimum_height
+    #height: dp(50)
+    #width: dp(180)
+    orientation: "vertical"
+    #spacing: dp(10)
+    padding: dp(5)
+    #md_bg_color: 0,0,0,0
+    
+    canvas.before:
+        Color:
+            rgba: 1,1,1,1
+            
+        RoundedRectangle:
+            pos: self.pos
+            size:self.size
+            texture: root.app.criar_gradient_texture((1,1,1,0.5), (0, 0.5, 0,1))
+            radius: [dp(30)]
+        Line:
+            rounded_rectangle: [self.x, self.y, self.width, self.height, dp(30)]
+            width: dp(1)
+    #box responsavel pela imagem
+        
+        
+    MDBoxLayout:
+        orientation: "horizontal"
+        size_hint: 1, None
+        #width: self.minimum_width
+        height: self.minimum_height
+        #padding: dp(10)
+        #radius: [dp(20), 0, dp(20), 0]
+        #md_bg_color: 1,1,1,1
+        
+        
+        Image:
+            id: img
+            source: ""
+            size_hint: 1, None
+            md_bg_color: 0,0,0,0
+            height: dp(55)
+            keep_ratio: True
+            mipmap: True
+            #height: dp(50)
+            #width: dp(180)
+            allow_stretch: True
+            canvas.before:
+                Color:
+                    rgba: 1,1,1,0.5
+                    
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [dp(25), 0, dp(25), 0]
+                    
+            
+            
+    #nome de mercadoria        
+    MDBoxLayout:
+        orientation: "horizontal"
+        padding: dp(5)
+        #size_hint: None, None
+        #size: self.minimum_size
+        #size_hint: 1, None
+        #padding: dp(10)
+        #width: self.minimum_width
+        
+        #height: self.minimum_height
+        #adaptive_size: True
+        
+        MDLabel:
+            markup: True
+            #shorten: True
+            text: root.nome_merca
+            #
+            #size_hint: None, None
+            #height: dp(10)
+            #on_texture_size: self.size= self.texture_size
+            #text_size: None, None
+            bold: True
+            
+            halign: "center"
+            valign:'middle'
+            
+            font_style: "Body2"
+            
+    
+    
+    # btn_ir_loja
+    MDBoxLayout:
+        orientation: "horizontal"
+        #size_hint: None, None
+        #padding: dp(2)
+        #height: self.minimum_height
+        #width: self.minimum_width
+        #size_hint: None,None
+        #padding: dp(2)
+        #size_hint: None, 1
+        #width: self.minimum_width
+        #height: self.minimum_height
+        
+        MDFillRoundFlatIconButton:
+            #size_hint: None, None
+            text: "Ir à loja"
+            icon: "arrow-right"
+            md_bg_color: 1,0.5,0,0.5
+            #text_size: self.width, None
+            on_release: root.disparar_ir_loja()
+            #theme_text_color: "Custom"
+            #text_color: 1,0.5, 0,0.5
+            #size: self.texture_size
+            #text_size: None, None
+            #width: dp(50)
+            #height: dp(10)
+            
+            
+    # preco antigo/novo
+    MDBoxLayout:
+        orientation: "horizontal"
+        #size_hint: None, None
+        #width: self.minimum_height
+        #height: self.minimum_height
+        orientation: "horizontal"
+        spacing: dp(2)
+        
+        MDLabel:
+            markup: True
+            text: "[b]" + "R${:.2f}".format(root.preco_antigo).replace(".", ",")
+            theme_text_color: "Custom"
+            text_color: 1,1, 0,0.8
+            halign: "center"
+            valign: "middle"
+            #text_size: self.width, None
+            #size_hint: None, None
+            #height: dp(10)
+            #width: dp(50)
+            
+            canvas.before:
+                Color:
+                    rgba: 1, 0, 0, 1
+                Line:
+                    points:[self.x, self.center_y, self.right, self.center_y]
+                    width: dp(1)
+            
+        MDLabel:
+            markup: True
+            text: "[b]" + "R${:.2f}".format(root.preco_recente).replace(".", ",")
+            #text_size: self.width, None
+            theme_text_color: "Custom"
+            text_color: 1,1, 0,1
+            #size_hint: 1, None
+            #height: dp(5)
+            
+            
+    #indice
+    MDBoxLayout:
+        orientation: "horizontal"
+        #size_hint: None, None
+        #width: self.minimum_width
+        #height: self.minimum_height
+        #size_hint: None, 1
+        #width: self.minimum_width
+        MDFillRoundFlatIconButton:
+            text: root.indic_texto
+            icon: root.indic_icon
+            #size_hint:0.5,1
+            md_bg_color: 0,0,0,0
+            theme_icon_color: "Custom"
+            theme_text_color: "Custom"
+            icon_color: root.indic_cor
+            text_color: root.indic_cor
+            #text_size: self.width, None
+        
+    #info_atualizacao
+    MDBoxLayout:
+        orientation: "horizontal"
+        #size_hint: 1, None
+#        width: self.minimum_width
+#        height: self.minimum_height
+        
+        MDLabel:
+            markup: True
+            text: "Atualização referente, {} á {}.".format(root.data_antiga, root.data_recente).replace("-", "/")
+            #size_hint: 1, None
+            #size: self.texture_size
+            #text_size: self.width, None
+            halign: "center"
+            #valign: "middle"
+            font_style: "Caption"
+            #height: dp(30)
+            
+        
+        
+<TelaInicial>:
+    canvas.before:
+        Color:
+            rgba: 1,1, 1, 1
+        Rectangle:
+            texture: root.app.criar_gradient_texture((0,0.5,0,0.5), (0, 0.2, 0, 0.5))
+            pos: self.pos
+            size: self.size
+
+    MDBoxLayout:
+        
+        orientation: "vertical"
+        id: conteiner_principal
+        
+
+        padding: dp(5)
+        spacing: dp(10)
+
+#Box by winbrasil -------- >
+        BoxLayout:
+            orientation: "vertical"
+            spacing: dp(10)
+            padding: dp(5)
+            size_hint: 1, None
+            height: dp(80)
+            canvas.before:
+                Color:
+                    rgba: 0, 0.5, 0, 0.7
+                    
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [dp(30)]
+                    #texture: root.app.criar_gradient_texture((1,1,1,1), (1,1,0,1))
+
+            Button:
+                id: by
+                markup: True
+                text: "[u][b]WINBRASIL"
+                font_name: "fonte/Black_Ops_One/BlackOpsOne-Regular.ttf"
+    
+                font_size: root.fonte_padrao
+                color: 0, 0, 0, 1
+                background_color: 0, 0, 0, 0
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    Ellipse:
+                        texture: root.app.criar_gradient_texture((1,1,1, 1), (1,1, 1,0.5))
+                        pos: self.pos
+                        size: self.size
+                        
+                    Color:
+                        rgba:1,1,1,1
+                        
+                    Line:
+                        points: [self.x , self.y+ dp(20), self.center_x, self.y, self.right, self.y +dp(20)]
+                        width: dp(0.6)
+            
+            Button:
+                id: nome_tela_inicial
+                markup: True
+                text: "[b]TELA INICIAL"
+                color: 0.4, 0.3, 0.2, 1
+                size_hint_y: None
+                height: dp(20)
+                font_name: "fonte/Unlock/Unlock-Regular.ttf"
+                font_size: min(sp(40),root.fonte_padrao // 1.7)
+                background_color: 0, 0, 0, 0
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 0.8
+                    RoundedRectangle:
+                        #texture: root.app.criar_gradient_texture()
+                        pos: self.pos
+                        size: self.size
+                        radius: [dp(50)]
+                        
+                    Color:
+                        rgba: 1,1,1,0.3
+                    Line:
+                        rounded_rectangle: [self.x, self.y, self.width, self.height, dp(50)]
+                        width: dp(0.6)
+# < ------------
+
+# Box pai destaque e seus filhos  --- >
+        MDBoxLayout:
+            id: box_central
+            orientation: "vertical"
+            spacing: dp(10)
+            #size_hint: None, None
+            #height: self.minimum_height
+            #width: self.minimum_width
+            
+            MDBoxLayout:
+                radius: [dp(40)]
+                md_bg_color: 1, 1, 1,0.5
+                id: box_pai_oferta
+                orientation: "vertical"
+                #size_hint: 1, None
+                #height: box_oferta.height
+                #height: self.minimum_height
+                #adaptive_height: True
+                #height: self.minimum_height
+                #size_hint_y: None
+                spacing: dp(10)
+                padding: dp(10)
+                
+                MDFillRoundFlatIconButton:
+                    text: "Mercadorias Em Destaque"
+                    icon:"chart-bar"
+                    theme_text_color: "Custom"
+                    text_color: 0,0.5,0,1
+                    size_hint: 1, 1
+                    md_bg_color: 0,0,0,0
+                    theme_text_color: 'Custom'
+                    theme_icon_color: "Custom"
+                    icon_color: 0, 1, 0, 1
+                    font_style: "H6"
+                    size_hint_y: None
+                    #canvas.before:
+#                        Color:
+#                            rgba: 1,1,1,1
+#                        RoundedRectangle:
+#                            pos: self.pos
+#                            size:self.size
+#                            radius: [dp(20), dp(20), 0, 0]
+#                            texture: root.app.criar_gradient_texture((0, 0.6, 0,0.8), (1, 1, 1,0.5))
+                    
+                    
+                RecycleView:
+                    viewclass: "OrgMerca"
+                    id: rv_oferta
+                    do_scroll_y: False
+                    
+                    
+                    RecycleBoxLayout:
+                        orientation: "horizontal"
+                        id:box_oferta
+                        spacing: dp(10)
+                        #padding: dp(10)
+                        default_size_hint: None, 1
+                        default_size: dp(180), None
+                        
+                        #default_size: None, 1
+                        #cols: 2
+                        size_hint: None, 1
+                        #size: self.minimum_size
+                        width: self.minimum_width
+                        #height: self.minimum_height
+                        
+                        
+                        
+                
+                    
+                    
+                MDBoxLayout:
+                    id: box_pai_mimos
+                    #md_bg_color: 0, 0.5, 0, 0.8
+                    padding: dp(5)
+                    size_hint: 1, 0.8
+                    
+                    orientation: "vertical"
+                    #size_hint: 1, 1
+                    #width: self.minimum_width
+                    #height: self.minimum_height
+                    canvas.before:
+                        Color:
+                            rgba: 1,1,1,1
+                            
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [dp(20)]
+                            texture: root.app.criar_gradient_texture((0, 0.5, 0, 1), (0, 0.5, 0, 0.5))
+                        
+                    MDFillRoundFlatIconButton:
+                        text: "Benefícios aos clientes"
+                        icon: "gift"
+                        size_hint: None, None
+                        width: box_pai_oferta.width - dp(20)
+                        md_bg_color: 0,0,0,0
+                        font_style: "Subtitle1"
+                        theme_icon_color: "Custom"
+                        icon_color: 1,1,0,1
+                        icon_size: dp(30)
+                        
+                    ScrollView:
+                        do_scroll_y: False
+                         
+                         
+                         
+                        MDBoxLayout:
+                            orientation: "horizontal"
+                            spacing:dp(10)
+                            #padding: dp(2)
+                            id: box_filho_mimos
+                            #size_hint: None, 1
+                            #height: self.minimum_height
+                            #width: self.minimum_width
+
+# < ----------
+
+# Box mais opcoes ---------- >
+        
+        MDBoxLayout:
+            size_hint: 1, None
+            #width: self.minimum_width
+            orientation: "vertical"
+            spacing: dp(5)
+            padding: dp(10)
+            
+            id: box_mas_opcoes_pai
+            radius: [dp(20)]
+            height: self.minimum_height
+            
+            MDLabel:
+                markup: True
+                text: "Mas opções?"
+                size_hint_y:None
+                height: dp(5)
+                
+            ScrollView:
+                size_hint_y: None
+                height: box_mas_opcoes_filho.height
+                do_scroll_y: False
+                
+            
+                MDBoxLayout:
+                    size_hint: None, None
+                    width: self.minimum_width
+                    height: self.minimum_height
+                    orientation: "horizontal"
+                    id: box_mas_opcoes_filho
+                    spacing:dp(10)
+                    padding: dp(5)
+                    #md_bg_color: 0,0,0,0
+
+                    radius: [dp(20)]
+                    
+                    
+                    MDFillRoundFlatIconButton:
+                        text: f"Estoque\n [size={int(sp(10))}] - Para conferente"
+                        icon: "account"
+                        md_bg_color: 0,0,0,0
+                        icon_size: dp(30)
+                        theme_icon_color: "Custom"
+                        icon_color: 1, 1, 1,0.4
+                        canvas.before:
+                            Color:
+                                rgba: 1,1,1,1
+                            Line:
+                                rounded_rectangle: [self.x, self.y, self.width, self.height, dp(2)]
+                                width: dp(0.2)
+                        
+                    
+                    MDFillRoundFlatIconButton:
+                        text: f"Ordem de serviço\n - [size={int(sp(10))}]Para gerenciamento de entregas[/size] "
+                        markup: True
+                        size_hint: None, None
+                        #size: (dp(50), dp(20))
+                        #height: dp(50)
+                        #width: dp(200)
+                        md_bg_color: 0,0,0,0
+                        icon: "package-variant-closed"
+                        theme_icon_color: "Custom"
+                        icon_color: 1, 1, 1, 0.4
+                        icon_size: dp(30)
+                        on_release: root.encaminhamento_seguro_login(self, box="OS")
+                        #md_bg_color: 0,0,0,0
+                        canvas.before:
+                            Color:
+                                rgba: 1,1,1,1
+                                
+                            Line:
+                                rounded_rectangle: [self.x, self.y, self.width, self.height, dp(2)]
+                                width: dp(0.2)
+                                
+                    MDFillRoundFlatIconButton:
+                        markup: True
+                        text: f"Gerenciamento de rotas\n[size={int(sp(10))}][color=#900000]-[i][b] Acesso restrito aos admins!"
+                        md_bg_color: 0,0,0,0
+                        size_hint: None, None
+                        icon: "truck-delivery-outline"
+                        icon_size: dp(30)
+                        theme_icon_color: "Custom"
+                        icon_color: 1, 1, 1,0.4
+                        
+                        canvas.before:
+                            Color:
+                                rgba: 1,0,0.2,0.5
+                                
+                            Line:
+                                rounded_rectangle: [self.x, self.y, self.width, self.height, dp(0)]
+                                width: dp(0.2)
+                                
+                            
+                    
+                
+
+        
+
+            
+# Box barra inferior ------ >
+        
+        MDBoxLayout:
+            orientation:"vertical"
+            #padding:dp(2)
+            size_hint: 1, None
+            height: self.minimum_height
+            
+            MDFillRoundFlatIconButton:
+                md_bg_color: 0,0,0,0
+                id: label_atualizacao
+                icon: "update"
+                icon_size: dp(20)
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1,1
+                text: "Versão do aplicativo:" + str(root.app.obter_versao_sdk())
+                #halign: "center"
+                #valign:"middle"
+                size_hint: 1, None
+                font_style: "Caption"
+                opacity: 0.8
+                on_release: root.app.downloads_atualizacao(url=root.app.db_api.get("winbrasil", None).get("versao", None).get("link_atualizacao", {}) if root.app.db_api.get("winbrasil", None).get("versao", None).get("link_atualizacao", None) else root.app.gerenciamento_info_geral(f" [color=#ff0000][b](!)[/b] Erro ao tentar acessar link para atualização do aplicativo!") , barra_progresso=root.barra_progresso, widget=self, permissao="wb")
+                #font_name: "fonte/Shafarik/Shafarik-Regular.ttf"
+                canvas.before:
+                    Color:
+                        rgba: 1,1,1,1
+                        
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [dp(50), dp(50), 0, 0]
+                        texture: root.app.criar_gradient_texture((0, 0.3, 0, 0.5), (1,1,1,0.5))
+            
+            
+            MDBoxLayout:
+                orientation: "horizontal"
+                radius: [dp(20), dp(20), 0, 0]
+                md_bg_color: 0, 0.4, 0, 1
+                size_hint_y: None
+                height: dp(80)
+                id: box_barra_inferior
+                canvas.before:
+                    Color:
+                        rgba: 1,1,1,0.4
+                        
+                    Line:
+                        rounded_rectangle: [self.x, self.y, self.width, self.height, dp(20), dp(20), 0, 0]
+                        width: dp(2)
+            
+                MDBoxLayout:
+                    id: box_home
+                    orientation: "vertical"
+                    spacing: dp(2)
+            
+                    MDIconButton:
+                        icon: "home"
+                        pos_hint: {"center_x": 0.5}
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        on_release: root.encaminhamento_seguro_login(self, box="inicial")
+            
+                    MDLabel:
+                        markup: True
+                        text: "[b]Início"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        halign: "center"
+                        size_hint_y: None
+            
+                MDBoxLayout:
+                    id: box_preco
+                    orientation: "vertical"
+                    spacing: dp(2)
+            
+                    MDIconButton:
+                        icon: "trending-up"
+                        pos_hint: {"center_x": 0.5}
+                        theme_text_color: "Custom"
+                        text_color: 0, 1, 0, 1
+                        on_release: root.encaminhamento_seguro_login(self, box="preço")
+            
+                    MDLabel:
+                        markup: True
+                        text: "[b]Preço"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        halign: "center"
+                        size_hint_y: None
+            
+                MDBoxLayout:
+                    orientation: "vertical"
+            
+                    MDIconButton:
+                        id: btn_compras
+                        icon: "basket"
+                        pos_hint: {"center_x": 0.5}
+                        theme_text_color: "Custom"
+                        text_color: 1, 0.1, 0, 1
+                        on_release: root.encaminhamento_seguro_login(self, box="compras")
+            
+                    MDLabel:
+                        markup: True
+                        text: "[b]Compras"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        halign: "center"
+                        size_hint_y: None
+            
+                MDBoxLayout:
+                    id: box_perfil
+                    orientation: "vertical"
+            
+                    MDIconButton:
+                        icon: "account"
+                        pos_hint: {"center_x": 0.5}
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        on_release: root.encaminhamento_seguro_login(self, box="perfil")
+            
+                    MDLabel:
+                        markup: True
+                        text: "[b]Perfil"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        halign: "center"
+                        size_hint_y: None
+
+
+    # < ----------
+                    
+# Box perfil ------ >                    
+                    
+    MDBoxLayout:
+        opacity: 0
+        orientation: "vertical"
+        id: box_lateral_perfil
+        size_hint: 0.6, 0.88
+        pos_hint: {"center_x":-1}
+        padding: dp(10)
+        spacing: dp(10)
+        #radius: [dp(20)]
+        canvas.before:
+            Color:
+                rgba: 1,1,1,1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                texture: root.app.criar_gradient_texture((0.5, 0.8, 0.5, 1), (1,1,1,1))
+                
+                
+            Ellipse:
+                size: self.size
+                pos: self.pos
+                #width: dp(1)
+                texture: root.app.criar_gradient_texture((0,0.2,0,0.2), (0,0.5,0.2,0.7))
+            
+            Color:
+                rgba: 1,1,1,0.4
+                
+            Line:
+                rectangle: [self.x, self.y, self.width, self.height]
+                width: dp(1)
+                
+        MDBoxLayout:
+            radius: [dp(30), dp(30), 0, 0]
+            padding: dp(10)
+            #md_bg_color: 0, 0, 0 ,0
+            #canvas.before:
+#                Color:
+#                    rgba: 1,1,1,1
+#                        
+#                RoundedRectangle:
+#                    pos: self.pos
+#                    size: self.size
+#                    texture: root.app.criar_gradient_texture((0, 0.5, 0, 1), (1, 1, 1, 1))
+            
+            Image:
+                source: "icones/icon_perfil_usuario/icon_perfil_usuario.png"
+                
+                
+                
+        MDLabel:
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            markup: True
+            text:"[b][u]PERFIL"
+            halign: "center"
+            font_name: "fonte/Unlock/Unlock-Regular.ttf"
+            size_hint_y: None
+            font_size: min(sp(25), root.fonte_padrao)
+                
+        MDBoxLayout:
+            orientation: "vertical"
+            radius: [dp(20), dp(20), 0, 0]
+            md_bg_color: 1, 1, 1, 0.2
+            padding: dp(20)
+            spacing: dp(15)
+            #size_hint_y: None
+            #height: self.minimum_height
+            
+            MDLabel:
+                markup: True
+                text:'[b]USUÁRIO'
+                size_hint_y: None
+                halign: "center"
+                font_size: min(root.app.fonte_padrao, sp(20))
+                
+            MDLabel:
+                #halign: "center"
+                theme_text_color: "Custom"
+                text_color: 1,1,1,1
+                id: texto_email_perfil
+                markup: True
+                
+                
+            MDLabel:
+                #halign: "center"
+                theme_text_color: "Custom"
+                text_color: 1,1,1,1
+                id: texto_token_perfil
+                markup: True
+                shorten: True
+                
+            MDLabel:
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                id: texto_token_perfil
+                markup: True
+                id:texto_uid_perfil
+                #shorten: True
+            
+                
+                
+        MDBoxLayout:
+            padding: dp(20)
+            id:box_sair_login
+            
+            
+            MDRectangleFlatButton:
+                #bold: True
+                markup: True
+                id: sair_login
+                size_hint: 1, 0.2
+                text: "[b]Sair do login"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                #md_bg_color: 1,1,1,0.2
+                on_release: root.delete_login()
+                canvas.before:
+                    Color:
+                        rgba: 1,1,1,1
+                        
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        texture: root.app.criar_gradient_texture((1,1,1,0.5), (0, 0.5, 0,1))

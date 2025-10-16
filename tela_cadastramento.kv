@@ -1,0 +1,222 @@
+#: import MDRaisedButton kivymd.uix.button.MDRaisedButton
+<TelaCadastramento>:
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+            
+        Rectangle:
+            
+            texture: root.app.criar_gradient_texture((0.1, 0.1, 0.2, 1), (0,0,0,1))
+            pos: self.pos
+            size: self.size
+            
+            
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Rectangle:
+                pos:self.pos
+                size: self.size
+                source:"icones/icon_fundo_tela_cadastramento/icon_fundo_tela_cadastramento.png"
+        
+        spacing: dp(10)
+        padding: dp(20)
+        
+        
+        BoxLayout:
+            spacing: dp(20)
+            padding: dp(40)
+            orientation: "vertical"
+            size_hint: 1, None
+            
+            height: self.minimum_height
+            canvas.before:
+                Color:
+                    rgba: 0.2, 0.1, 1, 0.2
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [dp(40)]
+ 
+            
+            Button:
+                size_hint: 1, None
+                
+                height: min(dp(150), root.win.height * 0.2)
+
+                background_color: 0,0,0,0
+                valign:"middle"
+                halign: "center"
+                canvas.before:
+                    Color:
+                        rgba: 1,1,1,1
+                    RoundedRectangle:
+                        source: "icones/icones_popup/popup_icon.jpg"
+                        pos: self.pos
+                        size: self.size
+                        radius: [dp(50)]
+                    Color:
+                        rgba: 1,1,1,1
+                        
+                    Line:
+                        rounded_rectangle: [self.x, self.y, self.width, self.height, dp(50)]
+                        width: dp(0.5)
+                    
+            
+        MDLabel:
+            markup: True
+            text:"[i]preencha todos os campos:"
+            theme_text_color: "Custom"
+            text_color: 1,1,1,1
+            size_hint: 1, None
+            valign: "middle"
+            halign: "left"
+            text_size: self.size
+            
+            
+            
+ #layout dos widgets cxs entradas, usuario, email, senhas etc -------- >
+            
+        BoxLayout:
+            orientation: "vertical"
+            #size_hint: 1, None
+            #height: self.minimum_height
+            spacing: dp(20)
+            padding: dp(20)
+            canvas.before:
+                Color:
+                    rgba: 0.2, 0, 1, 0.2
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [dp(40)]
+            
+            
+            TextInput:
+                id: cx_u
+                hint_text: "Insira usuário"
+                background_color: 0,0,0,0
+                font_size: root.fonte_padrao//1.5
+                multiline: False
+                input_type: "text"
+                canvas.before:
+                        
+                    Color:
+                        rgba: 1,1,1,1
+                        
+                    
+                    Line:
+                        rectangle: [self.x, self.y, self.width, 0]
+                        width: dp(0.5)
+                        
+                
+                #size_hint: 1, min(dp(100), root.win.height *0.1)
+                
+            TextInput:
+                id:cx_email
+                hint_text: "Insira email"
+                input_type: "mail"
+                input_filter: None
+                #keyboard_suggestions: True
+                on_text: self.text = self.text
+                #size_hint: 1, min(dp(100), root.win.height *0.1)
+                multiline: False
+                background_color: 0,0,0,0
+                font_size: root.fonte_padrao//1.5
+                canvas.before:
+                        
+                    Color:
+                        rgba: 1,1,1,1
+                    Line:
+                        rectangle: [self.x, self.y, self.width, 0]
+                        width: dp(0.5)
+                
+            TextInput:
+                id:cx_contato
+                hint_text: "Insira contato"
+                input_type: "tel"
+                multiline: False
+                #size_hint: 1, min(dp(100), root.win.height *0.1)
+                font_size: root.fonte_padrao//1.5
+                background_color: 0,0,0,0
+                canvas.before:
+                        
+                    Color:
+                        rgba: 1,1,1,1
+                    Line:
+                        rectangle: [self.x, self.y, self.width, 0]
+                        width: dp(0.5)
+                
+            TextInput:
+                id: cx_s1
+                hint_text: "Insira  senha"
+                password: True
+                multiline: False
+                font_size: root.fonte_padrao//1.5
+                input_type: "text"
+                #size_hint: 1, min(dp(100), root.win.height *0.1)
+                background_color: 0,0,0,0
+                canvas.before:
+                        
+                    Color:
+                        rgba: 1,1,1,1
+                    Line:
+                        rectangle: [self.x, self.y, self.width, 0]
+                        width: dp(0.5)
+                
+            TextInput:
+                id: cx_s2
+                hint_text: "Insira senha novamente"
+                multiline: False
+                password: True
+                font_size: root.fonte_padrao//1.5
+                input_type: "text"
+                #size_hint: 1, min(dp(100), root.win.height *0.1)
+                background_color: 0,0,0,0
+                canvas.before:
+                        
+                    Color:
+                        rgba: 1,1,1,1
+                    Line:
+                        rectangle: [self.x, self.y, self.width, 0]
+                        width: dp(1)
+                
+                
+                
+            MDRaisedButton:
+                markup: True
+                size_hint: 1, 1
+                text:"[b]CADASTRAR"
+                font_size: root.fonte_padrao//1.5
+                on_release: root.verificar_cadas()
+                
+        BoxLayout:
+            spacing: dp(5)
+            padding: dp(10)
+            size_hint: 1, None
+            height: self.minimum_height
+             
+            orientation: "horizontal"
+             
+            Button:
+                markup: True
+                text: "[b]LOGIN"
+                size_hint: 1, None
+                height: min(dp(50), root.win.height * 0.05)
+                background_color: 0.2,0,1,1
+                on_release: setattr(root.app.root, "current", "tela_login")
+                
+        Label:
+            markup: True
+            text:" • Direitos reservados ao [color=#0000ff]WinBrasil[/color], 2025."
+            size_hint: 1, None
+            valign: "middle"
+            halign: "left"
+            text_size: self.size
+                 
+                 
+             
+         
+            
+            
+        

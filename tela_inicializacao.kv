@@ -1,0 +1,243 @@
+<inicial>:
+    #layout, janela principal ------------------ >
+    FloatLayout:
+        background_color: 0,0,0,0
+        #size_hint:1,1
+        canvas.before:
+            Rectangle:
+                texture: app.gradient_texture
+                pos: self.pos
+                size: self.size
+                
+    
+        BoxLayout:
+            #padding: dp(10)
+            
+            
+            orientation: "vertical"
+            size_hint:1, 0.3
+            pos_hint: {"x": 0.0, "y":0.7}
+            height: self.minimum_height
+            background_color: 0,0,0,0
+            
+            ScrollView:
+                do_scroll_y: False
+                #do_scroll_x: True
+                id: lay_scroll_pai
+                background_color: 0,0,0,0
+                
+
+                
+                BoxLayout:
+                    orientation: "vertical"
+                    id: lay_box_ai
+                    background_color: 0,0,0,0
+                    
+                    size_hint: None, None
+                    height: self.minimum_height
+                    width: self.minimum_width
+                    background_color: 0, 0, 0, 0
+                    
+                    Button:
+                        id: btn_id
+                        markup: True
+                        text: ""
+                        size_hint: None, None
+                        height: dp(100)
+                        width: root.tamanho_x_tela
+                        color: 0, 0, 1, 1
+                        font_size: root.fonte_padrao
+                        on_release: root.alerta_do_sistema(arg="ola")
+                        opacity: 0
+                        background_color: 0, 0, 0, 0
+                        canvas.before:
+                            Color:
+                                rgba: 0.5, 0, 0.2, 1
+                            Ellipse:
+                                texture: app.gradient_texture
+                                size: self.size
+                                pos: self.pos
+                            Color:
+                                rgba: 0.2, 0.2, 1, 1
+                            Line:
+                                
+                                ellipse: [0, self.y, self.width, self.height, self.width, self.height]
+                                cap: "square"
+                                width: dp(2)
+                                joint: "bevel"
+                                texture: app.gradient_texture
+                                close: False
+                                dash_length: dp(2)
+# < ------------------------------
+                                
+ # layout das opcões -------------- >
+        Button:
+            id: btn_a
+       
+            background_color: 0,0,0,0
+            markup:True
+            text: "[b]• Opções para acesso:"
+            valign: "middle"
+            halign: "center"
+            size_hint: None, None
+            width: dp(200)
+            height: dp(50)
+            pos_hint:{"x":0.0, "y":0.76}
+            
+            
+        BoxLayout:
+            orientation: "vertical"
+            height: self.minimum_height
+            size_hint: 1, 0.1
+            pos_hint: {"x":0.0, "y":0.65}
+            
+            ScrollView:
+                do_scroll_y: False
+                bar_width: 0
+                
+                BoxLayout:
+                    spacing: dp(20)
+                    orientation:"horizontal"
+                    size_hint: None, None
+                    width: self.minimum_width
+                    height: self.minimum_height
+                    
+                    Button:
+                        markup: True
+                        size_hint: None, None
+                        markup: True
+                        id: texto_login
+                        text: "[b][i]GESTÃO EMPRESARIAL"
+                        height: dp(50)
+                        width: dp(200)
+                        background_color: 0,0,0,0
+                        on_release: root.canvas_widgets
+                        
+                        
+                        canvas.before:
+                            Color:
+                                rgba:(0.2, 0.2, 0.5, 1)
+
+                            Ellipse:
+                                pos: self.pos
+                                size: self.size
+                            #Color:
+#                                rgba: 1,0,0,0.2
+#                            Line:
+#                                ellipse:[0, self.y, self.width, self.height, self.width, self.height]
+#                                width: dp(0.5)
+                                
+                        
+                        
+                    Button:
+                        markup: True
+                        text: "[b][i]CEASA"
+                        size_hint: None, None
+                        width: dp(200)
+                        height: dp(50)
+                        background_color: 0,0,0,0
+                        canvas.before:
+                            Color:
+                                rgba:(0.2, 0.2, 0.5, 1)
+                            
+
+                            Ellipse:
+                                pos: self.pos
+                                size: self.size
+                            #Color:
+#                                rgba: 1,0,0,0.2
+#                            Line:
+#                                ellipse:[0, self.y, self.width, self.height, self.width, self.height]
+#                                width: dp(1)
+                    
+                    Button:
+                        markup: True
+                        text: "[b][i]EMPRESAS"
+                        size_hint: None, None
+                        width: dp(200)
+                        height: dp(50)
+                        background_color: 0,0,0,0
+                        canvas.before:
+                            Color:
+                                rgba:0.2, 0.2, 0.5, 1
+
+                            Ellipse:
+                                pos: self.pos
+                                size: self.size
+                    Button:
+                        markup: True
+                        text: "[b][i]ADMIN"
+                        size_hint: None, None
+                        width: dp(200)
+                        height: dp(50)
+                        background_color: 0,0,0,0
+                        canvas.before:
+                            Color:
+                                rgba:0.2, 0.2, 0.5, 1
+
+                            Ellipse:
+                                pos: self.pos
+                                size: self.size
+        
+                
+                
+# < ------------------------------
+
+#layout de baixo com.winbrasil --------------- >
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: 1, 0.08
+            background_color: 0,0,0,0
+            pos_hint: {"x":0.0, "y":0.0}
+            canvas.before:
+                        
+                Rectangle:
+                    texture: app.gradient_texture
+                        
+                    pos: self.pos
+                    size: self.size 
+                #orientation: "vertical"
+            ScrollView:
+                bar_width: 0
+                do_scroll_y: 0
+                    #background_color: 0,0,0,0
+                    
+                    
+                    
+                BoxLayout:
+                    size_hint: None, None
+                    width: self.minimum_width
+                    height: self.minimum_height
+                    orientation: "horizontal"
+                    canvas.before:
+                        Color:
+                            rgba: 0,0,0,0
+                                            
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                                            
+                                            
+                    Button:
+                        id: by
+                        opacity: 0
+                        size_hint: None, None
+                        markup: True
+                        text:"[b]COM.WINBRASIL"
+                #                        valign: "middle"
+                #                        halign: "center"
+                        width: dp(410)
+                        height: dp(75)
+                        background_color: 0,0,0,0
+                        on_release: root.info_criador()
+                        canvas.before:
+                            Color:
+                                rgba:0.2,0,1,0.1
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+                                
+# < -------------------------------
+        
+                        
+                               
