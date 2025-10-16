@@ -12,7 +12,7 @@ def verify():
         return jsonify({"ok": False, "error": "id_token ausente!"}), 400
 
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def raiz():
     return "online"
 
