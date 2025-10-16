@@ -1,23 +1,49 @@
 from flask import Flask, request, jsonify
 import os
-
+import requests
 
 app =  Flask(__name__)
 
 @app.post("/auth/verify")
-def verify():
+def verificar_token():
     data = request.get_json(silent=True) or {}
     token = data.get("id_token")
     
     if not token:
         return jsonify({"ok": False, "error": "id_token ausente!"}), 400
         
+    FIREBASE_API_KEY = "AIzaSyATicQTeRmBrWIHmNIzoi5zL3w-Lo7PkAw"
+    
+    url = f"https://identitytoolkit.google.apis.com/v1/accounts: lookup?key={FIREBASE_API_KEY}"
+        
     return jsonify({"ok": True, "msg": "Token recebido com sucesso!"})
+    
+    try:
+        resp = requests.post(url, json={"idToken": token})
+        info = resp.json()
+        
+        if "users" in info:
+            usuario = info["users"][0]
+            email = usuario.get("email")
+            uid = usuario.get("localId")
+            
+            return jsonify({"ok": True, "uid": uid, "email": email, "msg": "Token Válido!"})
+            
+        else:
+            return jsonify({"ok": False, "error": "Token inválido ou expirado!", "detalhes": info}), 401
+            
+            
+        
+    except Exception as erro:
+        return jsonify({"ok": False, "error": str(erro)}), 500
+    
+    
+    
 
 
 @app.route("/", methods=["GET"])
-def raiz():
-    return "online"
+def home():
+    return "servidor online"
 
 @app.route("/resposta", methods=["POST"])
 def servidor():
